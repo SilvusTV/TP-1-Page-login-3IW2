@@ -1,0 +1,27 @@
+services:
+  web:
+    build: docker-compose
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html/
+      - ./docker-compose/server/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker-compose/server/apache2.conf:/etc/apache2/apache2.conf
+      - ./docker-compose/server/php.ini:/usr/local/etc/php/php.ini
+
+  database:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_USER=esgi
+      - POSTGRES_PASSWORD=EsgiPwd
+      - POSTGRES_ROOT_PASSWORD=RootPwd
+      - POSTGRES_DB=esgi
+    ports:
+      - '5432:5432'
+    volumes:
+      - psql-data:/var/lib/postgresql/data
+      - ./docker-compose/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  psql-data:
