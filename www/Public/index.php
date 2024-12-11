@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 spl_autoload_register("autoLoader");
 function autoLoader(string $class){
     $pathClass = "../".str_ireplace(["App\\", "\\"], ["","/"], $class).".php";

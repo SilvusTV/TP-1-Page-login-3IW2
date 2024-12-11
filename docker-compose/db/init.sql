@@ -1,12 +1,12 @@
--- create database esgi;
-
 create table USERS
 (
-    id         integer      not null
+    id         SERIAL      not null
         constraint ID
             primary key,
-    uername    varchar(128) not null,
-    email      varchar(320) not null,
+    first_name    varchar(64) not null,
+    last_name    varchar(64) not null,
+    email       VARCHAR(100) UNIQUE not null,
     password   varchar(255) not null,
+    country    varchar(64) not null,
     created_at timestamp default current_timestamp
 );
